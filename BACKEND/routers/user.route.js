@@ -7,7 +7,7 @@ const userRouter = Router();
 userRouter.get("/", GetUser);
 userRouter.post("/signup", Signup);
 userRouter.post("/login", Login);
-userRouter.delete("/:id", deleteUser);
+userRouter.delete("/delete/:id", deleteUser);
 userRouter.get("/verify/:token/:otp", verifyUser);
 userRouter.get("/all-admin", decode, isSuperAdmin, getAdmins);
 userRouter.patch("/admin-update/:id" , toggleUserActiveStatus)
