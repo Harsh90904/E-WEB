@@ -35,6 +35,26 @@ const superAdminApi = {
       console.error("Error updating admin status:", error);
       return null;
     }
+  },
+  deleteAdminStatus: async (adminId)=>  {
+    try {
+      const response = await fetch(`${baseUrl}/user/delete/${adminId}`, {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to delete admin status");
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error("Error deleteing admin status:", error);
+      return null;
+    }
   }
 };
 export default superAdminApi
