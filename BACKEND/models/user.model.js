@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
   number: { type: Number },
   isActive: { type: Boolean, default: true },
   isVerified: { type: Boolean, default: false },
+  Comment:{}
 });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;

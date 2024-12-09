@@ -18,7 +18,7 @@ const navbar = () => {
   return `
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/index.html">Navbar</a>
+        <a class="navbar-brand" href="/index.html"><img src="../images/logos/logos.png" width="90px"   alt=""></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -36,7 +36,10 @@ const navbar = () => {
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/pages/products.html">Products</a>
+              <a class="nav-link" href="/pages/book.html">Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/addStorys.html">ADDBooks</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/pages/cart.html">Cart</a>
@@ -72,7 +75,6 @@ export default navbar;
 
 document.addEventListener("DOMContentLoaded", () => {
   let logoutBtn = document.getElementById("logout");
-  console.log(logoutBtn);
 
   if (logoutBtn) {
     logoutBtn.addEventListener("click", logOut);

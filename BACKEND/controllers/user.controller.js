@@ -75,9 +75,14 @@ const Login = async (req, res) => {
     .json({ msg: "user loggedIn", token: token, isVerified: user.isVerified,isActive: user.isActive });
 };
 
-const GetUser = async (req, res) => {
-  let users = await User.find();
-  res.status(200).json(users);
+const GetUserByid = async (req, res) => {
+  try {
+    let { userid } = req.params;
+    let data = await User.findById(userid);
+    res.send(data);
+  } catch (error) {
+    res.send({ message: error });
+  }
 };
 
 const deleteUser = async (req, res) => {
@@ -91,9 +96,20 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const verifyUser = async (req, res) => {
+const getAdmins = async (req, res) => {
+try {
+    let data = await User.find({ role: "ADMIN" });
+    res.status(202).json(data);
+    console.log(data);
+    
+} catch (error) {
+  res.status(404).json({ err:error.message });
+}
+};
+const toggleUserActiveStatus = async (req, res) => {
   let { token, otp } = req.params;
   let decode = await jwt.verify(token, "private-key");
+  
   if (!decode) {
     return res.status(403).json({ msg: "err" });
   }
@@ -111,36 +127,4 @@ const verifyUser = async (req, res) => {
   }
 };
 
-const getAdmins = async (req, res) => {
-try {
-    let data = await User.find({ role: "ADMIN" });
-    res.status(202).json(data);
-    console.log(data);
-    
-} catch (error) {
-  res.status(404).json({ err:error.message });
-}
-};
-const toggleUserActiveStatus = async (req, res) => {
-  const { id } = req.params;
-  const { isActive } = req.body;
-
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      id,
-      { isActive },
-      { new: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ msg: "User not found" });
-    }
-
-    res.status(200).json({ msg: "User status updated", updatedUser });
-  } catch (error) {
-    console.error("Error updating user status:", error.message);
-    res.status(500).json({ msg: "Error updating user status", error: error.message });
-  }
-};
-
-module.exports = { Signup, Login, GetUser, verifyUser, deleteUser , getAdmins , toggleUserActiveStatus};
+module.exports = { Signup, Login, GetUserByid, deleteUser , getAdmins , toggleUserActiveStatus};

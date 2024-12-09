@@ -1,0 +1,115 @@
+/* Container styling for a grid layout */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px; /* Adjust for column spacing */
+  }
+  
+  .col-6 {
+    flex: 0 0 50%; /* Take up half the row's width */
+    max-width: 50%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Styling for the details container */
+  .details {
+    display: flex;
+    gap: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+  }
+  
+  /* Styling for the image container */
+  .details .image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Styling for the content container */
+  .details .content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Title styling */
+  .details .content h3 {
+    margin: 0;
+    font-size: 35px;
+    color: #333;
+  }
+  
+  /* Price and description styling */
+  .details .content p {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #555;
+  }
+  
+  /* Button styling */
+  .details .content .add-to-cart {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .details .content .add-to-cart:hover {
+    background-color: #0056b3;
+  }
+  /* comment */
+  #comment-section {
+    margin-top: 20px;
+  }
+  
+  #comment-box {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  
+  #post-comment {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #post-comment:hover {
+    background-color: #45a049;
+  }
+  
+  #comments-display {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .username {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .comment-text {
+    margin: 0;
+  }
+  

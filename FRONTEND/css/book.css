@@ -1,0 +1,79 @@
+/* General styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+  }
+  
+  /* Styling the booklist container */
+  #booklist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Individual book card styling */
+  #booklist div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Hover effect for book cards */
+  #booklist div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Styling the book image */
+  #booklist img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  /* Styling the book title */
+  #booklist h3 {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0 5px;
+  }
+  
+  /* Styling the book price */
+  #booklist p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+  }
+  /* Styling for Add to Cart button */
+.add-to-cart {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  /* Hover effect */
+  .add-to-cart:hover {
+    background-color: #218838;
+  }
+  
+  /* Active effect */
+  .add-to-cart:active {
+    transform: scale(0.98);
+  }
+  

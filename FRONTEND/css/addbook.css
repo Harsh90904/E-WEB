@@ -1,0 +1,52 @@
+/* General form styles */
+#form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Input and textarea styles */
+  #form input[type="text"],
+  #form textarea,
+  #form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  /* Textarea specific styles */
+  #form textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  /* Submit button styles */
+  #form input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  #form input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Placeholder color */
+  #form input::placeholder,
+  #form textarea::placeholder {
+    color: #aaa;
+  }
+  
