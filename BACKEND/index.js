@@ -6,6 +6,7 @@ const { userRouter } = require("./routers/user.route");
 const path = require("path");
 const productrouter = require("./routers/product.router");
 const { CommentRouter } = require("./routers/comment.router");
+const cartrouter = require("./routers/cart.router");
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/user",userRouter)
 app.use("/products", productrouter);
 app.use("/comment", CommentRouter );
+app.use("/cart", cartrouter)
 const PORT = process.env.PORT || 8090;
 app.listen(PORT, () => {
   console.log("listening on port ", PORT);
