@@ -1,12 +1,12 @@
+import cartapi from "../api/cart.api.js";
 import productApi from "../api/product.api.js";
 import navbar from "../components/navbar.js";
 
 document.getElementById("navbar").innerHTML = navbar();
-
 const mapper = (data) => {
-  data.map(({ _id, title, price, img }) => {
+  data.map(({ user,_id, title, price, img }) => {
     let div = document.createElement("div");
-    div.setAttribute("id", _id)
+    div.setAttribute("id", _id, )
     let a = document.createElement("a");
     a.href = `pages/detail.html?id=${_id}`;
     let titleT = document.createElement("h3");
@@ -20,15 +20,23 @@ const mapper = (data) => {
 
     let cartButton = document.createElement("button");
     cartButton.textContent = "Add to Cart";
+    cartButton.setAttribute("id", "cart");
     cartButton.classList.add("add-to-cart");
     cartButton.addEventListener("click", () => {
+      let userId = user;
+      let productId = _id;
+      let product = { userId, productId };
+      console.log(product);
+      
+       cartapi.add(product);
       alert(`${title} has been added to your cart!`);
     });
-    div.append(a);
-    a.append(imgT, titleT, priceT, cartButton);
+    div.append(a, cartButton);
+    a.append(imgT, titleT, priceT);
     document.getElementById("booklist").append(div);
   });
 };
+
 
 const getProducts = async () => {
   let data = await productApi.get();
