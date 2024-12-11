@@ -1,71 +1,64 @@
 import { getToken } from "../utils/Cookies.js";
 
 const baseUrl = "http://localhost:8090";
+
 const cartapi = {
   getbyid: async (id) => {
     try {
-      let story = await fetch(`${baseUrl}/cart/${id}`)
-      let res =  await story.json();
-      return res;
+      const response = await fetch(`${baseUrl}/cart/${id}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      return await response.json();
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching cart by ID:", error);
     }
   },
+
   add: async (data) => {
-    console.log(data);
     try {
-      let product = await fetch(`${baseUrl}/cart/add`, {
+      const response = await fetch(`${baseUrl}/cart/add`, {
         method: "POST",
-        headers:{
-          "content-type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify(data),
       });
-      let res = await product.json();
-      console.log(res);
-      // return res;
+      return await response.json();
     } catch (error) {
-      console.log(error);
-    }
-  },
-  remove: async (id) => {
-    try {
-      let product = await fetch(`${baseUrl}/cart/remove`);
-      let res = await product.json();
-      return res;
-    } catch (error) {
-      console.log(error);
+      console.error("Error adding product to cart:", error);
     }
   },
 
-  addqty: async (id, data) => {
+  remove: async (id) => {
     try {
-      let product = await fetch(`${baseUrl}/cart/add-quantity`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(data),
-      });
-      let res = await product.json();
-      return res;
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  removeqty: async (id) => {
-    try {
-      let product = await fetch(`${baseUrl}/cart/remove-quantity`, {
+      const response = await fetch(`${baseUrl}/cart/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      let res = await product.json();
-      return res;
+      return await response.json();
     } catch (error) {
-      console.log(error);
+      console.error("Error removing product from cart:", error);
+    }
+  },
+
+  updateQuantity: async (id, qty) => {
+    try {
+      const response = await fetch(`${baseUrl}/cart/update-quantity/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ qty }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error updating quantity:", error);
     }
   },
 };

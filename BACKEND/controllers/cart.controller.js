@@ -1,67 +1,79 @@
 const Cart = require("../models/cart.modal");
 
 const getByProductId = async (req, res) => {
-    const { userId,productId } = req.params;
+    const { userId } = req.params;
 
     try {
-        const cart = await Cart.findOne({user:userId}).populate(productId);
+        const cart = await Cart.find({ user: userId }).populate("product");
         res.send(cart);
     } catch (error) {
-        res.send({ error: error.message });
+        res.status(500).send({ error: error.message });
     }
 };
 
 const addToCart = async (req, res) => {
     const { userId, productId } = req.body;
-    console.log(req.body);  
+
     try {
-        let cart = await Cart.create({user:userId, product: productId });
-        console.log("cart", cart);   
-        let isExtistent =await Cart.findOne({user: userId, product: productId})
-        if(isExtistent) {
-            cart.qty += 1
-            cart.save();
-            res.send({isExtistent})
-        } else {
-            res.send({cart});
+        let cartItem = await Cart.findOne({ user: userId, product: productId });
+        if (cartItem) {
+            cartItem.qty += 1;
+            await cartItem.save();
+            return res.send({ message: "Quantity updated", cartItem });
         }
+        const newCartItem = await Cart.create({ user: userId, product: productId });
+        res.send({ message: "Product added to cart", newCartItem });
     } catch (error) {
-        res.send({ error: error.message });
+        res.status(500).send({ error: error.message });
     }
-    
 };
 
 const removeFromCart = async (req, res) => {
-    const { userId, productId } = req.body;
+    const { cartId } = req.params;
 
     try {
-        const cart = await Cart.findByIdAndDelete();
-        res.send(cart);
+        await Cart.findByIdAndDelete(cartId);
+        res.send({ message: "Product removed from cart" });
     } catch (error) {
-        res.send({ error: error.message });
+        res.status(500).send({ error: error.message });
     }
 };
 
-const addQuantity = async (req, res) => {
-    const { cartId, qty } = req.body;
+// const addQuantity = async (req, res) => {
+//     const { productId, qty } = req.body;
+
+//     try {
+//         qty += 1; 
+//         const cart = await Cart.findByIdAndUpdate({ _id:productId }, {qty: qty},{new: true});
+//         res.send(cart);
+//     } catch (error) {
+//         res.send({ error: error.message });
+//     }
+// };
+// const removeQuantity = async (req, res) => {
+//     const { productId, qty } = req.body;
+
+//     try {
+//         qty -= 1; 
+//         const cart = await Cart.findByIdAndUpdate({ _id:productId }, {qty: qty},{new: true});
+//         res.send(cart);
+//     } catch (error) {
+//         res.send({ error: error.message });
+//     }
+// };
+const updateQuantity = async (req, res) => {
+    const { cartId } = req.params;
+    const { qty } = req.body;
 
     try {
-        qty += 1; 
-        const cart = await Cart.findByIdAndUpdate({ _id:cartId }, {qty: qty},{new: true});
-        res.send(cart);
+        if (qty < 1) {
+            await Cart.findByIdAndDelete(cartId);
+            return res.send({ message: "Product removed from cart due to zero quantity" });
+        }
+        const updatedCart = await Cart.findByIdAndUpdate(cartId, { qty }, { new: true });
+        res.send({ message: "Quantity updated", updatedCart });
     } catch (error) {
-        res.send({ error: error.message });
+        res.status(500).send({ error: error.message });
     }
 };
-const removeQuantity = async (req, res) => {
-    const { cartId, qty } = req.body;
-
-    try {
-        qty -= 1; 
-        const cart = await Cart.findByIdAndUpdate({ _id:cartId }, {qty: qty},{new: true});
-        res.send(cart);
-    } catch (error) {
-        res.send({ error: error.message });
-    }
-};
-module.exports = { getByProductId, addToCart, removeFromCart, addQuantity, removeQuantity};
+module.exports = { getByProductId, addToCart, removeFromCart, updateQuantity};

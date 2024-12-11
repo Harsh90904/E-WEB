@@ -1,11 +1,12 @@
 const {Router} = require('express');
-const { getByProductId, addToCart, removeFromCart, addQuantity, removeQuantity } = require('../controllers/cart.controller'); 
+const { getByProductId, addToCart, removeFromCart, updateQuantity } = require('../controllers/cart.controller'); 
 const cartrouter = Router();
 
 
-cartrouter.get('/:userid', getByProductId );
-cartrouter.post('/add', addToCart); 
-cartrouter.post('/remove', removeFromCart );
-cartrouter.post('/add-quantity', addQuantity); 
-cartrouter.post('/remove-quantity', removeQuantity); 
+cartrouter.get("/:userId", getByProductId); 
+cartrouter.post("/add", addToCart); 
+cartrouter.delete("/:cartId", removeFromCart); 
+// cartrouter.patch('/add-qty/:productid', addQuantity); 
+// cartrouter.post('/remove-quantity', removeQuantity); 
+cartrouter.patch("/update-quantity/:cartId", updateQuantity);
 module.exports = cartrouter;
