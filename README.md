@@ -15,11 +15,6 @@ E-WEB is a robust and dynamic web application designed to [insert purpose, e.g.,
 4. [Technologies Used](#technologies-used)
 5. [Architecture Overview](#architecture-overview)
 6. [Screenshots](#screenshots)
-7. [Roadmap](#roadmap)
-8. [Contributing](#contributing)
-9. [License](#license)
-10. [Contact](#contact)
-
 ---
 
 ## About the Project
