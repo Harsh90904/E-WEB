@@ -1,4 +1,4 @@
-#### Readly
+# Readly
 
 E-WEB is a robust and dynamic web application designed to [insert purpose, e.g., revolutionize e-commerce, streamline data management, enhance user engagement]. This project aims to deliver a seamless and user-friendly experience with advanced features tailored for modern needs.
 
