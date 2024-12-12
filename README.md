@@ -14,12 +14,11 @@ E-WEB is a robust and dynamic web application designed to [insert purpose, e.g.,
    - [Running the Application](#running-the-application)
 4. [Technologies Used](#technologies-used)
 5. [Architecture Overview](#architecture-overview)
-6. [Usage](#usage)
-7. [Screenshots](#screenshots)
-8. [Roadmap](#roadmap)
-9. [Contributing](#contributing)
-10. [License](#license)
-11. [Contact](#contact)
+6. [Screenshots](#screenshots)
+7. [Roadmap](#roadmap)
+8. [Contributing](#contributing)
+9. [License](#license)
+10. [Contact](#contact)
 
 ---
 
@@ -57,23 +56,31 @@ Make sure you have the following installed:
  ### Technologies Used
 - **Backend**:
 
-- **Node.js
-- **Express.js
-- **MongoDB
+- Node.js
+- Express.js
+- MongoDB
 - **Frontend**:
 
-- **HTML5
-- **CSS3
-- **JavaScript
+- HTML5
+- CSS3
+- JavaScript
 - **Other Tools**:
 
-- **Git
-- **npm (Node Package Manager)
-- **dotenv (for environment variables)
+- Git
+- npm (Node Package Manager)
+- dotenv (for environment variables)
 
 ### Architecture Overview
 
-- **E-WEB follows a [design pattern, e.g., MVC (Model-View-Controller)] architecture to ensure separation of concerns and scalability. Below is a high-level breakdown:
+- E-WEB follows a [design pattern, e.g., MVC (Model-View-Controller)] architecture to ensure separation of concerns and scalability. Below is a high-level breakdown:
 - Frontend: Handles user interactions and visuals
 - Backend: Processes requests, business logic, and database interactions.
 - Database: Stores user and application data securely.
+
+### Screenshots 
+- **Login**
+- **Home**
+- **Product**
+- **Cart**
+- **Profile**
+  
