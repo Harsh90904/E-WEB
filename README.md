@@ -54,8 +54,26 @@ Make sure you have the following installed:
 - **MongoDB**: [Download here](https://www.mongodb.com/try/download/community)
 - **Git**: [Download here](https://git-scm.com/)
 
-### Installation
+ ### Technologies Used
+- **Backend**:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Harsh90904/E-WEB.git
+- **Node.js
+- **Express.js
+- **MongoDB
+- **Frontend**:
+
+- **HTML5
+- **CSS3
+- **JavaScript
+- **Other Tools**:
+
+- **Git
+- **npm (Node Package Manager)
+- **dotenv (for environment variables)
+
+### Architecture Overview
+
+- **E-WEB follows a [design pattern, e.g., MVC (Model-View-Controller)] architecture to ensure separation of concerns and scalability. Below is a high-level breakdown:
+- Frontend: Handles user interactions and visuals
+- Backend: Processes requests, business logic, and database interactions.
+- Database: Stores user and application data securely.
