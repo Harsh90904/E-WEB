@@ -79,8 +79,9 @@ Make sure you have the following installed:
 
 ### Screenshots 
 - **Login**
+![Screenshot 2024-12-12 100122](https://github.com/user-attachments/assets/75825fbc-e3d2-4322-9d69-99cfc4f3f355)
 - **Home**
-- **Product**
+![Screenshot 2024-12-12 095916](https://github.com/user-attachments/assets/5bed4093-10cf-420b-b9ca-ebab31ac7b98)
 - **Cart**
-- **Profile**
-  
+![Screenshot 2024-12-12 095945](https://github.com/user-attachments/assets/22405b76-a759-4621-8c9d-14b74e8437c8)
+
