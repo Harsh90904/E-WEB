@@ -79,4 +79,8 @@ Make sure you have the following installed:
 ![Screenshot 2024-12-12 095916](https://github.com/user-attachments/assets/5bed4093-10cf-420b-b9ca-ebab31ac7b98)
 - **Cart**
 ![Screenshot 2024-12-12 095945](https://github.com/user-attachments/assets/22405b76-a759-4621-8c9d-14b74e8437c8)
+- **Payment**
+- ![Screenshot 2024-12-13 192309](https://github.com/user-attachments/assets/0b16e693-d0e6-4109-9c49-a7821351ffd3)
+![Screenshot 2024-12-13 192242](https://github.com/user-attachments/assets/6d57fd6a-6da1-4fcf-abc4-ec3c2cc8ceda)
+![Screenshot 2024-12-13 192228](https://github.com/user-attachments/assets/5d466d72-f7f4-4e9b-9258-576faf001849)
 
