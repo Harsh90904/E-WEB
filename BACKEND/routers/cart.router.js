@@ -5,6 +5,7 @@ const {
   removeCart,
   addQty,
   removeQty,
+  checkout,
 } = require("../controllers/cart.controller");
 const { decode } = require("../middlewares/decodeJwt");
 
@@ -14,5 +15,5 @@ cartRoute.post("/", decode, addToCart);
 cartRoute.delete("/:cartId", decode, removeCart);
 cartRoute.patch("/add-qty/:cartId", decode, addQty);
 cartRoute.patch("/remove-qty/:cartId", decode, removeQty);
-
+cartRoute.post("/payment", checkout);
 module.exports = cartRoute;
