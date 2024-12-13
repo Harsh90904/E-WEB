@@ -1,5 +1,6 @@
+const Razorpay = require("razorpay");
 const Cart = require("../models/cart.modal");
-
+require("dotenv").config();
 const getByUserId = async (req, res) => {
   const userId = req.user.id;
   try {
@@ -73,11 +74,30 @@ const removeQty = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+const razorpay = new Razorpay({
+  key_id: "rzp_test_Pd4tazzzZH53jv",
+  key_secret: "tidBzI6GEwsKkjajgHNdB2x2",
+});
+const checkout = async (req, res) => {
+  const { amount } = req.body;
 
+  const options = {
+    amount: amount * 100,
+    currency: "INR",
+  };
+
+  try {
+    let data = await razorpay.orders.create(options);
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(500).send({ err: error });
+  }
+};
 module.exports = {
   getByUserId,
   addQty,
   removeQty,
   removeCart,
   addToCart,
+  checkout
 };
