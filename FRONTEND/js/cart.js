@@ -11,7 +11,13 @@ const handleQtyicon = (id, opr) => {
   }
   window.location.reload();
 };
-
+const payment = async (amount) => {
+  try {
+    cartApi.payment(amount);
+  } catch (error) {
+    console.log(error);
+  }
+}
 let totalPrice = 0;
 const mapper = (data) => {
   data.map(({ _id, qty, product }) => {
@@ -45,6 +51,7 @@ const mapper = (data) => {
   amount.innerHTML = totalPrice;
   let btn = document.createElement("button");
   btn.innerHTML = "Pay";
+  btn.addEventListener("click", () => payment(totalPrice));
   let div = document.createElement("div");
 
   div.append(amount, btn);
