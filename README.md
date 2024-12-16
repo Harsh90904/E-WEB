@@ -54,8 +54,8 @@ Make sure you have the following installed:
 - Node.js
 - Express.js
 - MongoDB
+  
 - **Frontend**:
-
 - HTML5
 - CSS3
 - JavaScript
