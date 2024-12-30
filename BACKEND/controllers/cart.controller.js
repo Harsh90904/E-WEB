@@ -1,37 +1,66 @@
 const Razorpay = require("razorpay");
 const Cart = require("../models/cart.modal");
 require("dotenv").config();
+
 const getByUserId = async (req, res) => {
   const userId = req.user.id;
   try {
-    let cart = await Cart.find({ user: userId }).populate("product");
+    const cart = await Cart.find({ user: userId }).populate("product");
     console.log("cart", cart);
-
     res.send(cart);
   } catch (error) {
-    console.log("error", error);
-
+    console.error("Error fetching cart:", error);
     res.status(500).send({ error: error.message });
   }
 };
 
 const addToCart = async (req, res) => {
   req.body.user = req.user.id;
-
   const { user, product } = req.body;
   try {
-    let isExists = await Cart.findOne({ user: user, product: product });
+    let existingCartItem = await Cart.findOne({ user, product });
 
-    if (isExists) {
-      isExists.qty += 1;
-      await isExists.save();
-      res.status(200).send(isExists);
+    if (existingCartItem) {
+      existingCartItem.qty += 1;
+      await existingCartItem.save();
+      res.status(200).send(existingCartItem);
     } else {
-      let cart = await Cart.create(req.body);
-
-      res.status(201).send(cart);
+      const cartItem = await Cart.create(req.body);
+      res.status(201).send(cartItem);
     }
   } catch (error) {
+    console.error("Error adding to cart:", error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
+const addMultipleProductsToCart = async (req, res) => {
+  req.body.user = req.user.id;
+  const { user, products } = req.body;
+
+  if (!Array.isArray(products) || products.length === 0) {
+    return res.status(400).send({ error: "Products array is required and should not be empty." });
+  }
+
+  try {
+    const addedProducts = [];
+
+    for (const product of products) {
+      let existingCartItem = await Cart.findOne({ user, product });
+
+      if (existingCartItem) {
+        existingCartItem.qty += 1;
+        await existingCartItem.save();
+        addedProducts.push(existingCartItem);
+      } else {
+        const cartItem = await Cart.create({ user, product });
+        addedProducts.push(cartItem);
+      }
+    }
+
+    res.status(201).send(addedProducts);
+  } catch (error) {
+    console.error("Error adding multiple products to cart:", error);
     res.status(500).send({ error: error.message });
   }
 };
@@ -39,47 +68,64 @@ const addToCart = async (req, res) => {
 const removeCart = async (req, res) => {
   const { cartId } = req.params;
   try {
-    let cart = await Cart.findByIdAndDelete(cartId);
+    const cart = await Cart.findByIdAndDelete(cartId);
+    if (!cart) {
+      return res.status(404).send({ error: "Cart item not found" });
+    }
     res.status(200).send(cart);
   } catch (error) {
+    console.error("Error removing cart item:", error);
     res.status(500).send({ error: error.message });
   }
 };
 
 const addQty = async (req, res) => {
-  let { cartId } = req.params;
+  const { cartId } = req.params;
   try {
-    let cart = await Cart.findById(cartId);
+    const cart = await Cart.findById(cartId);
+    if (!cart) {
+      return res.status(404).send({ error: "Cart item not found" });
+    }
     cart.qty += 1;
     await cart.save();
     res.status(200).send(cart);
   } catch (error) {
+    console.error("Error increasing quantity:", error);
     res.status(500).send({ error: error.message });
   }
 };
 
 const removeQty = async (req, res) => {
-  let { cartId } = req.params;
+  const { cartId } = req.params;
   try {
     let cart = await Cart.findById(cartId);
-    if (cart.qty >= 2) {
+    if (!cart) {
+      return res.status(404).send({ error: "Cart item not found" });
+    }
+    if (cart.qty > 1) {
       cart.qty -= 1;
       await cart.save();
       res.status(200).send(cart);
     } else {
-      cart = await Cart.findByIdAndDelete(cartId);
-      res.status(200).send(cart);
+      await Cart.findByIdAndDelete(cartId);
+      res.status(200).send({ message: "Cart item removed" });
     }
   } catch (error) {
+    console.error("Error decreasing quantity:", error);
     res.status(500).send({ error: error.message });
   }
 };
+
 const razorpay = new Razorpay({
-  key_id: "rzp_test_Pd4tazzzZH53jv",
-  key_secret: "tidBzI6GEwsKkjajgHNdB2x2",
+  key_id: process.env.RAZORPAY_KEY_ID || "rzp_test_Pd4tazzzZH53jv",
+  key_secret: process.env.RAZORPAY_KEY_SECRET || "tidBzI6GEwsKkjajgHNdB2x2",
 });
+
 const checkout = async (req, res) => {
   const { amount } = req.body;
+  if (!amount || isNaN(amount)) {
+    return res.status(400).send({ error: "Invalid amount" });
+  }
 
   const options = {
     amount: amount * 100,
@@ -87,17 +133,20 @@ const checkout = async (req, res) => {
   };
 
   try {
-    let data = await razorpay.orders.create(options);
-    res.status(200).send(data);
+    const order = await razorpay.orders.create(options);
+    res.status(200).send(order);
   } catch (error) {
-    res.status(500).send({ err: error });
+    console.error("Error creating Razorpay order:", error);
+    res.status(500).send({ error: error.message });
   }
 };
+
 module.exports = {
   getByUserId,
   addQty,
   removeQty,
   removeCart,
   addToCart,
-  checkout
+  addMultipleProductsToCart,
+  checkout,
 };
