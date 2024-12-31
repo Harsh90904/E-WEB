@@ -69,6 +69,8 @@ const Login = async (req, res) => {
     username: user.username,
     isActive: user.isActive,
   };
+  console.log(data);
+  
   let token = await jwt.sign(data, "private-key");
   return res
     .status(200)
@@ -99,9 +101,8 @@ const deleteUser = async (req, res) => {
 const getAdmins = async (req, res) => {
 try {
     let data = await User.find({ role: "ADMIN" });
-    res.status(202).json(data);
     console.log(data);
-    
+    res.status(202).json(data);
 } catch (error) {
   res.status(404).json({ err:error.message });
 }
