@@ -1,4 +1,5 @@
 import { getToken } from "../../utils/Cookies.js";
+console.log(getToken());
 
 const baseUrl = "http://localhost:8090";
 const superAdminApi = {
@@ -10,6 +11,7 @@ const superAdminApi = {
           Authorization: `Bearer ${getToken()}`,
         },
       });
+
       let res = await req.json();
       console.log(res);
       return res;

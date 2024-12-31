@@ -1,10 +1,11 @@
 import superAdminApi from "../api/superAdmin/superadmin.api.js";
 import userApi from "../api/user.api.js";
-import navbar from "../components/navbar.js";
+import {navbar} from "../components/navbar.js";
 import getUserData, { isSuperAdmin } from "../utils/Cookies.js";
 document.getElementById("navbar").innerHTML = navbar();
 
 const admin = (data) => {
+  console.log(data)
   data.map((admin) => {
     let div = document.createElement("div");
     let h1 = document.createElement("h1");
@@ -19,12 +20,14 @@ const admin = (data) => {
 
     active.addEventListener("click", async () => {
       await userApi.updateAdminStatus(admin._id);
+      window.location.reload();
     });
     let reject = document.createElement("button");
     reject.textContent = "reject";
 
     reject.addEventListener("click", async () => {
       await userApi.deleteAdminStatus(admin._id, true);
+      window.location.reload();
     });
     let hr = document.createElement("hr");
     div.append(h1, p, role, active, reject, hr);
@@ -35,7 +38,7 @@ const admin = (data) => {
 if (isSuperAdmin()) {
   let data = await superAdminApi.getAdmins();
   console.log(data);
-  const unactiveadimn = data.filter((admin) => admin.isVerified == false);
+  const unactiveadimn = data.filter((admin) => admin.isActive == false);
   admin(unactiveadimn);
 } else {
   console.log("No super admin");

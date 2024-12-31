@@ -33,7 +33,7 @@ const userApi = {
       if (res.isActive) {
         Cookies.set("token", res.token, { expires: 3 });
         Cookies.set("isVerified", res.isVerified);
-        window.location.href = "/";
+        window.location.href = "http://127.0.0.1:5500/E-WEB/FRONTEND/";
       } else {
         alert("not activated");
       }

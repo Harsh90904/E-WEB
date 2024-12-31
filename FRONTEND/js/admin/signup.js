@@ -1,5 +1,5 @@
 import userApi from "../../api/user.api.js";
-import getValue from "../../components/input.js";
+// import document.querySelector from "../../components/input.js";
 import navbar from "../../components/navbar.js";
 
 document.getElementById("navbar").innerHTML = navbar();
@@ -7,10 +7,10 @@ document.getElementById("navbar").innerHTML = navbar();
 const handleSubmit = (e) => {
   e.preventDefault();
   let user = {
-    username: getValue("#username"),
-    email: getValue("#email"),
-    number: getValue("#number"),
-    password: getValue("#password"),
+    username: document.querySelector("#username"),
+    email: document.querySelector("#email"),
+    number: document.querySelector("#number"),
+    password: document.querySelector("#password"),
     role: "ADMIN",
     isActive: false,
   };

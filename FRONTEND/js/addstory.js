@@ -1,5 +1,5 @@
-import productApi from "../../api/product.api.js";
-import navbar from "../components/navbar.js";
+import bookApi from "../api/product.api.js";
+import {navbar} from "../components/navbar.js";
 
 document.getElementById("navbar").innerHTML = navbar();
 const handleSubmit = (e) => {
@@ -13,6 +13,6 @@ const handleSubmit = (e) => {
   formdata.append("description", description);
   formdata.append("price", price);
   formdata.append("img", img.files[0]);
-  productApi.post(formdata);
+  bookApi.post(formdata);
 };
 document.getElementById("form").addEventListener("submit", handleSubmit);

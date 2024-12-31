@@ -1,6 +1,6 @@
 import commentApi from "../api/commnet.api.js";
 import productApi from "../api/product.api.js";
-import navbar from "../components/navbar.js";
+import {navbar} from "../components/navbar.js";
 
 document.getElementById("navbar").innerHTML = navbar();
 const queryParams = new URLSearchParams(window.location.search)
@@ -10,7 +10,7 @@ console.log(queryParams.get("id"));
 const mapper = (data) => {
   data.map(({ _id, title, price, img,description }) => {
     console.log(_id);
-    var productId = `_id`
+    const  productId = `_id`
     let div = document.createElement("div");
     div.classList.add("details");
     let imagdiv = document.createElement("div");
@@ -77,7 +77,7 @@ const postComment = async () => {
   const data = JSON.stringify({
     username: "Anonymous", 
     text: commentText,
-    productId,
+    productApi,
   });
 
   const response = await commentApi.post(data);
@@ -90,7 +90,7 @@ const postComment = async () => {
 
 // Fetch and display comments
 const fetchComments = async () => {
-  const comments = await commentApi.getById(productId);
+  const comments = await commentApi.getById(productApi);
   renderComments(comments);
 };
 
