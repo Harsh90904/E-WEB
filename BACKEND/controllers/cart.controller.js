@@ -33,38 +33,6 @@ const addToCart = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
-
-const addMultipleProductsToCart = async (req, res) => {
-  req.body.user = req.user.id;
-  const { user, products } = req.body;
-
-  if (!Array.isArray(products) || products.length === 0) {
-    return res.status(400).send({ error: "Products array is required and should not be empty." });
-  }
-
-  try {
-    const addedProducts = [];
-
-    for (const product of products) {
-      let existingCartItem = await Cart.findOne({ user, product });
-
-      if (existingCartItem) {
-        existingCartItem.qty += 1;
-        await existingCartItem.save();
-        addedProducts.push(existingCartItem);
-      } else {
-        const cartItem = await Cart.create({ user, product });
-        addedProducts.push(cartItem);
-      }
-    }
-
-    res.status(201).send(addedProducts);
-  } catch (error) {
-    console.error("Error adding multiple products to cart:", error);
-    res.status(500).send({ error: error.message });
-  }
-};
-
 const removeCart = async (req, res) => {
   const { cartId } = req.params;
   try {
