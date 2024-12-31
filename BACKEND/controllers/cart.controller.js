@@ -115,6 +115,5 @@ module.exports = {
   removeQty,
   removeCart,
   addToCart,
-  addMultipleProductsToCart,
   checkout,
 };
