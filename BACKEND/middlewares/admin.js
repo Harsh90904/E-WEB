@@ -4,6 +4,8 @@ const isSuperAdmin = (req, res, next) => {
   try {
     if (req.user) {
       if (req.user?.role == "CEO") {
+        console.log(req.user.role);
+        
         return next();
       } else {
         return res
