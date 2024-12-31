@@ -13,7 +13,7 @@ export const navbar = () => {
   if (decodedToken) {
     tag = `<a class="nav-link" id=logout>Logout</a>`;
   } else {
-    tag = `<a class="nav-link" href="http://127.0.0.1:5500/E-WEB/FRONTEND/pages/login.html">Login</a>`;
+    tag = `<a class="nav-link" href="/pages/login.html">Login</a>`;
   }
   return `
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -33,26 +33,26 @@ export const navbar = () => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5500/E-WEB/FRONTEND/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://127.0.0.1:5500/E-WEB/FRONTEND/pages/book.html">Books</a>
+              <a class="nav-link" href="/pages/book.html">Books</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://127.0.0.1:5500/E-WEB/FRONTEND/pages/addStorys.html">ADDBooks</a>
+              <a class="nav-link" href="/pages/addStorys.html">ADDBooks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://127.0.0.1:5500/E-WEB/FRONTEND/pages/cart.html">Cart</a>
+              <a class="nav-link" href="/pages/cart.html">Cart</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="http://127.0.0.1:5500/E-WEB/FRONTEND/pages/profile.html">profile</a>
+              <a class="nav-link" href="h/pages/profile.html">profile</a>
             </li>
             <li class="nav-item">
               ${tag}
             </li>
             <li class="nav-item">
               <a class="nav-link" ${
-                decodedToken ? "" : `http://127.0.0.1:5500/E-WEB/FRONTEND/pages/signup.html`
+                decodedToken ? "" : `/pages/signup.html`
               }>${decodedToken ? decodedToken.username : "Signup"}</a>
             </li>
           </ul>
